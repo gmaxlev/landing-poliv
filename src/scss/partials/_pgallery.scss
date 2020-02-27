@@ -1,0 +1,48 @@
+.pgallery {
+  box-shadow: 0px 10px 46px 0px transparentize($color: $color-c, $amount: 0.85);
+  border-radius: 15px;
+  background: linear-gradient(180deg, #f5f5f5, #eaeaea);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.pgallery__item {
+  text-align: center;
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  display: block;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    width: 50%;
+    opacity: 0.36;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 1) 100%
+    );
+    width: 50%;
+    opacity: 0.36;
+  }
+  & > img {
+    width: 100%;
+    max-width: 100%;
+    vertical-align: bottom;
+  }
+}

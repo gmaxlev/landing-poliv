@@ -19,4 +19,52 @@
 // Глобальные стили
 @import "./global";
 
+// Swiper
+@import "./vendor/swiper.min";
+
 // Блоки (БЭМ)
+@import "./partials/container";
+@import "./partials/intro";
+@import "./partials/header";
+@import "./partials/button";
+@import "./partials/callphone";
+@import "./partials/insta";
+@import "./partials/edge";
+@import "./partials/countyears";
+@import "./partials/section-header";
+@import "./partials/section-art";
+@import "./partials/section";
+@import "./partials/art";
+@import "./partials/accent";
+@import "./partials/motiv";
+@import "./partials/imageart";
+@import "./partials/circart";
+@import "./partials/rectart";
+@import "./partials/wrapper";
+@import "./partials/section-subheader";
+@import "./partials/services";
+@import "./partials/goform";
+@import "./partials/circles";
+@import "./partials/portfolio";
+@import "./partials/pwork";
+@import "./partials/p";
+@import "./partials/strong";
+@import "./partials/pgallery";
+@import "./partials/gallerypag";
+@import "./partials/workspag";
+@import "./partials/slidernum";
+@import "./partials/works";
+@import "./partials/bigform";
+@import "./partials/deform";
+@import "./partials/input-text";
+@import "./partials/select";
+@import "./partials/btitle";
+@import "./partials/listdots";
+@import "./partials/bltoform";
+@import "./partials/promo";
+@import "./partials/footer";
+@import "./partials/scrollup";
+@import "./partials/modal";
+@import "./partials/window";
+@import "./partials/valerror";
+@import "./partials/formcomplete";

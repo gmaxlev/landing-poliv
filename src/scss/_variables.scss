@@ -2,17 +2,33 @@
   Контрольные точки
 */
 
-$grid-breakpoints: (xs: 0,
+$grid-breakpoints: (
+  xs: 0,
   sm: 576px,
   md: 768px,
   lg: 992px,
   xl: 1200px,
-  xxl: 1920px) !default;
+  xxl: 1920px
+) !default;
 
 /**
   Часто используемые цвета
 */
 
+$color-a: #ffef00;
+$color-b: #10a34a;
+$color-c: #2c2c2c;
+$color-d: #616161;
+$color-e: #f5f4f4;
+$color-f: #dddddd;
+$color-g: #6a6a6a;
+$color-h: #11a149;
+$color-i: #10a24a;
+$color-j: #e8e8e8;
+$color-n: #34b010;
+
 /* 
   Шрифты
 */
+
+$font-a: "Gotham Pro", sans-serif;

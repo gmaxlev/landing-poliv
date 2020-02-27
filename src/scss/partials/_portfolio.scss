@@ -1,0 +1,40 @@
+.portfolio {
+  display: flex;
+  align-items: center;
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+  }
+}
+
+.portfolio__gallery {
+  width: 51.5%;
+  padding: 0 33px;
+  box-sizing: border-box;
+  position: relative;
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 50px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    background-color: $color-i;
+    top: 30px;
+    bottom: 30px;
+    left: 0;
+    border-radius: 15px;
+  }
+}
+.portfolio__about {
+  width: 49.5%;
+  padding-left: 65px;
+  padding-right: 33px;
+  padding-top: 50px;
+  box-sizing: border-box;
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+    padding: 0;
+  }
+}

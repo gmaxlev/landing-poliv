@@ -1,0 +1,95 @@
+.circles {
+  position: absolute;
+  .svg-sprite {
+    width: 420px;
+    height: 420px;
+  }
+}
+
+.circles_white {
+  .svg-sprite {
+    stroke: #fff;
+  }
+}
+
+.circles_dark {
+  .svg-sprite {
+    stroke: $color-e;
+  }
+}
+
+.circles_1 {
+  right: -176px;
+  bottom: -85px;
+}
+
+.circles_2 {
+  right: calc(100% + 70px);
+  bottom: -180px;
+}
+.circles_3 {
+  top: -80px;
+  left: -148px;
+  z-index: -1;
+}
+.circles_4 {
+  bottom: -222px;
+  left: -179px;
+  z-index: -1;
+}
+.circles_5 {
+  top: -99px;
+  right: 188px;
+  z-index: 1;
+}
+.circles_6 {
+  bottom: -43px;
+  right: -114px;
+  z-index: -1;
+}
+.circles_7 {
+  top: -480px;
+  right: -192px;
+  z-index: -1;
+}
+.circles_8 {
+  top: -206px;
+  right: -174px;
+  z-index: 1;
+  @include media-breakpoint-down(xs) {
+    display: none;
+  }
+}
+.circles_9 {
+  top: 35px;
+  right: -500px;
+  z-index: -1;
+}
+.circles_10 {
+  top: 35px;
+  right: -500px;
+  z-index: -1;
+}
+.circles_11 {
+  bottom: -366px;
+  left: -360px;
+  z-index: 1;
+  @include media-breakpoint-down(xs) {
+    display: none;
+  }
+}
+.circles_12 {
+  bottom: -60%;
+  left: 37%;
+  z-index: -1;
+}
+.circles_13 {
+  bottom: 4%;
+  right: -15%;
+  z-index: -1;
+}
+.circles_14 {
+  top: 10%;
+  left: -15%;
+  z-index: -1;
+}

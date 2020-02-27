@@ -1,0 +1,36 @@
+.gallerypag {
+}
+
+.gallerypag__prev,
+.gallerypag__next {
+  outline: none;
+  width: 26px;
+  height: 26px;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  &:hover {
+    background-color: $color-c;
+  }
+  .svg-sprite {
+    width: 11px;
+    height: 11px;
+    fill: #fff;
+  }
+}
+
+.gallerypag__next {
+  right: 32px;
+}
+
+.gallerypag__prev {
+  left: 26px;
+}

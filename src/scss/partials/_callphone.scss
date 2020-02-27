@@ -1,0 +1,40 @@
+.callphone {
+  display: inline-flex;
+  align-items: center;
+  align-items: center;
+  &:hover {
+    & > span {
+      opacity: 0.8;
+    }
+    & > .svg-sprite {
+      opacity: 0.5;
+    }
+  }
+  & > span {
+    margin-left: 13px;
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #fff;
+    transition: opacity 0.3s;
+    transition-delay: 0.1s;
+    @include media-breakpoint-down(xs) {
+      font-size: 0.75rem;
+      margin-left: 5px;
+    }
+  }
+  & > .svg-sprite {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+    transition: opacity 0.3s;
+  }
+}
+
+.callphone_black {
+  & > span {
+    color: $color-c;
+  }
+  & > .svg-sprite {
+    fill: $color-n !important;
+  }
+}

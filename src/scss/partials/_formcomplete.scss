@@ -1,0 +1,31 @@
+.formcomplete {
+  display: none;
+}
+
+.formcomplete_modal {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #10a34a;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  text-align: center;
+  & > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+  .formcomplete_ok {
+    color: #fff;
+  }
+  .formcomplete_error {
+    color: #940000;
+  }
+}

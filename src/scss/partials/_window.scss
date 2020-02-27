@@ -1,0 +1,23 @@
+.window {
+  .deform {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+.window__header {
+  padding: 50px 50px 0 50px;
+  @include media-breakpoint-down(xs) {
+    padding: 20px 20px;
+  }
+}
+
+.window__content {
+  padding: 50px;
+  background-color: $color-b;
+  position: relative;
+  @include media-breakpoint-down(xs) {
+    padding: 20px 20px 35px;
+  }
+}

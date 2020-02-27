@@ -1,0 +1,9 @@
+.accent {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  margin: 25px 0;
+  & > span {
+    color: $color-d;
+  }
+}

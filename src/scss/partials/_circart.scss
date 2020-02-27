@@ -1,0 +1,128 @@
+.circart {
+  & > span {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-image: url("../img/circle.svg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    z-index: 2;
+  }
+}
+
+.circart_ty1 {
+  & > span {
+    &:nth-child(1) {
+      width: 32px;
+      height: 32px;
+      right: 13%;
+      top: 27%;
+    }
+    &:nth-child(2) {
+      width: 56px;
+      height: 56px;
+      right: 21%;
+      top: 7%;
+    }
+    &:nth-child(3) {
+      width: 56px;
+      height: 56px;
+      right: 20%;
+      top: 38%;
+    }
+    &:nth-child(4) {
+      width: 56px;
+      height: 56px;
+      left: 24%;
+      top: 46%;
+    }
+    &:nth-child(5) {
+      width: 32px;
+      height: 32px;
+      left: 20%;
+      top: 33%;
+    }
+  }
+}
+.circart_ty2 {
+  & > span {
+    &:nth-child(1) {
+      width: 32px;
+      height: 32px;
+      right: 14%;
+      top: 11%;
+    }
+    &:nth-child(2) {
+      width: 56px;
+      height: 56px;
+      right: 62%;
+      top: 7%;
+    }
+    &:nth-child(3) {
+      width: 56px;
+      height: 56px;
+      right: 33%;
+      top: 31%;
+    }
+    &:nth-child(4) {
+      width: 56px;
+      height: 56px;
+      left: 81%;
+      top: 56%;
+    }
+    &:nth-child(5) {
+      width: 32px;
+      height: 32px;
+      left: 15%;
+      top: 43%;
+    }
+  }
+}
+.circart_ty3 {
+  & > span {
+    &:nth-child(1) {
+      width: 32px;
+      height: 32px;
+      right: 14%;
+      top: 11%;
+    }
+    &:nth-child(2) {
+      width: 56px;
+      height: 56px;
+      right: 62%;
+      top: 7%;
+    }
+    &:nth-child(3) {
+      width: 56px;
+      height: 56px;
+      right: 33%;
+      top: 31%;
+    }
+    &:nth-child(4) {
+      width: 56px;
+      height: 56px;
+      left: 81%;
+      top: 56%;
+    }
+    &:nth-child(5) {
+      width: 32px;
+      height: 31px;
+      left: 15%;
+      top: 43%;
+    }
+    &:nth-child(6) {
+      width: 56px;
+      height: 56px;
+      left: 60%;
+      top: 76%;
+      &:nth-child(7) {
+        width: 56px;
+        height: 56px;
+        left: 60%;
+        top: 76%;
+      }
+    }
+  }
+}
