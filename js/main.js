@@ -6,6 +6,7 @@ $(document).ready(function() {
   */
   var sliderPhotos = new Swiper(".slider-photos", {
     loop: true,
+    autoHeight: true,
     spaceBetween: 30,
     navigation: {
       nextEl: ".gallerypag__next",
@@ -17,6 +18,7 @@ $(document).ready(function() {
     Слайдер "Объекты"
   */
   var sliderProjects = new Swiper(".slider-projects", {
+    autoHeight: true,
     on: {
       init: function() {
         $(".works")
@@ -268,11 +270,10 @@ $(document).ready(function() {
       });
   });
 
-
   /* 
         Форма "Замер"
     */
-   $(".form-measure").each(function() {
+  $(".form-measure").each(function() {
     $(this)
       .submit(function(e) {
         e.preventDefault();
