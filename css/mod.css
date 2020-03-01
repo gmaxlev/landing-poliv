@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+.intro__bg::after {
+    opacity: .39;
+}
+.intro__video {
+    background: url(../img/video.png) center center no-repeat;
+}
+.window__content {
+    background: none
+}
+.header__logo .insta {display: none}
+.insta>span {    margin-left: 10px}
+.input-text, .select {
+    border: solid 1px #ccc;}
+select {border-radius: 0
+}
+.modal__window .section-subheader {margin-bottom: 0
+}
+
+.modal__window .button_b>span:nth-child(1)::after {
+    background-color: #ccc
+}
+.modal__window  .button_b>span:nth-child(2) {color: #ccc
+}
+.modal__window  .section-header {color: #10a34a;}
+
+.pgallery .swiper-wrapper {
+    align-items: center;
+}
+.pgallery__item>img {
+    max-height: 400px;
+}
+.pwork__header {
+    margin-bottom: 22px;
+}
+.slidernum {
+    margin-top: 30px;
+}
+a.goform {display: block}
+
+
+
+@media only screen and (min-width: 1000px){
+.intro__header {
+    font-size: 3.5rem;
+    line-height: 4rem}
+}
+
+@media only screen and (max-width: 1040px){
+        .footer__copy>span {display: block;         }
+    }
+
+
+@media only screen and (max-width: 991.98px){
+    .header__logo .insta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+.header__contacts .insta {display: none}
+}
+
+@media only screen and (max-width: 900px){
+    .footer__logo  {display: none}
+    }
+
+    @media only screen and   (max-width: 575.98px){
+    .header__content {padding: 20px 0;flex-wrap: wrap}
+        .header__contacts {position: static;     flex-grow: unset;}
+        .header__phone {padding-right: 0}
+        .header__logo {text-align: center; width: 100%; margin-bottom: 20px}
+        .insta>span {
+            font-size: .6rem;
+        }
+        .insta>.svg-sprite {
+            width: 18px;
+            height: 18px;
+        }
+        .header__logo>img {            max-width: 160px;        }
+        .header__call .button_a {            font-size: .6rem;        }
+        .callphone>span {
+            font-size: .9rem;
+            margin-left: 10px;
+        }
+        .bltoform, .intro__act, .promo__act {text-align: center}
+
+        .modal {
+            padding: 0; background: #fff        }
+        .modal__window {
+            margin: 0; box-shadow: none; padding-top: 50px
+        }
+        .section-header, .intro__header {
+            font-size: 1.8rem;
+        }
+        .promo {
+            padding: 85px 0 55px;
+        }
+        .section_accent .button_b {z-index:1}
+    
+.footer__contacts {flex-wrap: wrap}
+.footer__phone {
+    text-align: center;}
+    .footer__copy>span {text-align: center}
+    }
+
+    @media only screen and   (max-width: 350px){
+            .section-header, .intro__header {
+                font-size: 1.8rem;
+            }
+    
+        }

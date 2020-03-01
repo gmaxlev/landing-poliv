@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Автоматический полив под ключ Харьков - Poliv.Family</title><!-- ===============-->
+    <!-- Стили и скрипты-->
+    <!-- ===============-->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/mod.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/jquery.mask.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/wow.min.js"></script><!-- =====================-->
+    <!-- ЗАГРУЗКА SVG СПРАЙТОВ-->
+    <!-- =====================-->
+    <script>
+        $(document).ready(function() {
+
+            var req = new XMLHttpRequest();
+
+            req.onload = function(e) {
+                var svg = document.implementation.createHTMLDocument('');
+                svg.body.innerHTML = e.target.response.replace('<svg ', '<svg style="display: none"');
+                document.body.appendChild(svg.body.firstElementChild);
+                svg = null;
+            };
+
+            req.open('GET', './img/sprite.defs.svg', true);
+
+            req.responseType = 'text';
+
+            req.send();
+
+        });
+    </script>
+</head>
+
+<body>
+    <!-- ===========================-->
+    <!-- ОКНО "РАССЧИТАТЬ СТОИМОСТЬ"-->
+    <!-- ===========================-->
+    <div class="modal" id="modal-1">
+        <div class="modal__window">
+            <div class="modal__close"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#icon_close"></use>
+                </svg></div>
+            <div class="window">
+                <div class="window__header">
+                    <h2 class="section-header">узнайте стоимость системы</h2>
+                    <div class="section-subheader">Вы ничего не потеряете, если просто сравните цены, верно? Как правило, у нас существенно дешевле.</div>
+                </div>
+                <div class="window__content">
+                    <form class="form deform form-calc" action="">
+                        <div class="select">
+                            <div class="select__icon"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="#icon_arrow-down"></use>
+                                </svg></div><select name="type">
+                                <option value="Газон">Газон</option>
+                                <option value="Сад">Сад</option>
+                                <option value="Комбинированный">Комбинированный</option>
+                            </select>
+                        </div>
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/construction_carpenter_ruler.png" alt="" /></div><input type="text" name="size" placeholder="Размер участка, (м)" />
+                        </div>
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/customer.png" alt="" /></div><input type="text" name="name" placeholder="Имя" />
+                        </div>
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/touchscreen.png" alt="" /></div><input class="phone-input" type="text" name="phone" placeholder="Телефон" />
+                        </div><button class="button button_b" type="submit"><span>Рассчитать стоимость</span><span>Просчитать</span></button>
+                    </form>
+                    <div class="formcomplete formcomplete_modal formcomplete_ok"><span>Спасибо! Мы вас перезвоним</span></div>
+                    <div class="formcomplete formcomplete_modal formcomplete_error"><span>Не удалось отправить</span></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- ===========================-->
+    <!-- ОКНО "ЗАКАЗАТЬ ЗВОНОК"-->
+    <!-- ===========================-->
+    <div class="modal" id="modal-2">
+        <div class="modal__window">
+            <div class="modal__close"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#icon_close"></use>
+                </svg></div>
+            <div class="window">
+                <div class="window__header">
+                    <h2 class="section-header">получите консультацию</h2>
+                    <div class="section-subheader">Мы сами перезвоним и ответим на все вопросы. Просто оставьте контакты</div>
+                </div>
+                <div class="window__content">
+                    <form class="form deform form-call" action="">
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/customer.png" alt="" /></div><input type="text" name="name" placeholder="Имя" />
+                        </div>
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/touchscreen.png" alt="" /></div><input class="phone-input" type="text" name="phone" placeholder="Телефон" />
+                        </div><button class="button button_b" type="submit"><span>получить консультацию</span><span>Заказать звонок</span></button>
+                    </form>
+                    <div class="formcomplete formcomplete_modal formcomplete_ok"><span>Спасибо! Мы вас перезвоним</span></div>
+                    <div class="formcomplete formcomplete_modal formcomplete_error"><span>Не удалось отправить</span></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- ============-->
+        <!-- ОКНО "ЗАмер"-->
+    <!-- ===========================-->
+    <div class="modal" id="modal-3">
+        <div class="modal__window">
+            <div class="modal__close"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#icon_close"></use>
+                </svg></div>
+            <div class="window">
+                <div class="window__header">
+                    <h2 class="section-header">начните с замера!</h2>
+                    <div class="section-subheader">Давайте встретимся, мы ответим на все ваши вопросы, проведем замер участка, составим схему и просчитем точную стоимость.</div>
+                </div>
+                <div class="window__content">
+                    <form class="form deform form-measure" action="">
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/customer.png" alt="" /></div><input type="text" name="name" placeholder="Имя" />
+                        </div>
+                        <div class="input-text">
+                            <div class="input-text__icon"><img src="img/touchscreen.png" alt="" /></div><input class="phone-input" type="text" name="phone" placeholder="Телефон" />
+                        </div><button class="button button_b" type="submit"><span>Бесплатный замер</span><span>Заказать</span></button>
+                    </form>
+                    <div class="formcomplete formcomplete_modal formcomplete_ok"><span>Спасибо! Мы вас перезвоним</span></div>
+                    <div class="formcomplete formcomplete_modal formcomplete_error"><span>Не удалось отправить</span></div>
+                </div>
+            </div>
+        </div>
+    </div><!-- ============-->
+    <!-- КНОПКА ВВЕРХ-->
+    <!-- ============-->
+    <div class="scrollup"><span>Вверх</span></div>
+    <div class="wrapper">
+        <!-- ======-->
+        <!-- HEADER-->
+        <!-- ======-->
+        <div class="header">
+            <div class="container">
+                <div class="header__content">
+                    <div class="header__logo wow fadeIn" data-wow-delay="0.1s"><img src="img/logo-white.svg" alt="" />
+                        <a class="insta" href="https://www.instagram.com/poliv.family/"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                            <use xlink:href="#icon_instagram"></use>
+                        </svg><span>Мы в Instagram</span></a></div>
+                    <div class="header__contacts">
+                        <div class="header__insta wow fadeIn" data-wow-delay="0.2s"><a class="insta" href="https://www.instagram.com/poliv.family/"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="#icon_instagram"></use>
+                                </svg><span>Мы в Instagram</span></a></div>
+                        <div class="header__phone wow fadeIn" data-wow-delay="0.3s"><a class="callphone" href="tel:0979774247"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="#icon_phone"></use>
+                                </svg><span>(097) 977-42-47</span></a></div>
+                    </div>
+                    <div class="header__call wow fadeIn" data-wow-delay="0.4s"><button class="button button_a" data-modal="modal-2">Заказать звонок</button></div>
+                </div>
+            </div>
+        </div><!-- ===========-->
+        <!-- ПРИВЕТСТВИЕ-->
+        <!-- ===========-->
+        <div class="intro">
+            <div class="intro__bg">
+                <div class="intro__video"><video autoplay="autoplay" muted="muted" loop="loop">
+                        <source src="videos/intro.mp4" type="video/mp4" /></video></div>
+            </div>
+            <div class="intro__content">
+                <div class="container">
+                    <h1 class="intro__header wow fadeInUp" data-wow-delay="0.4s">Автоматический <br>полив в вашем саду <br>под ключ</h1>
+                    <div class="intro__subheader">
+                        <div class="edge">
+                            <div class="edge__content wow fadeInUp" data-wow-delay="0.5s">Гидравлический расчет, проектирование и монтаж с гарантией на оборудование</div>
+                            <div class="edge__acc wow fadeInRight" data-wow-delay="0.5s">
+                                <div class="countyears"><span class="countyears__num">5</span><span class="countyears__text">Лет</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="intro__act wow fadeInUp" data-wow-delay="0.8s"><button class="button button_b" data-modal="modal-1"><span>Рассчитать стоимость</span><span>Просчитать</span></button></div>
+                </div>
+            </div>
+        </div><!-- ========================================-->
+        <!-- КАК НЕ ПЕРЕПЛАТИТЬ ЗА СИСТЕМУ АВТОПОЛИВА-->
+        <!-- ========================================-->
+        <div class="container container_rel">
+            <section class="section">
+                <div class="section-art section-art_altop">
+                    <div class="section-art__text">
+                        <h2 class="section-header section-header_left wow fadeInUp" data-wow-delay="0.2s">Как не переплатить <br><span>за систему автополива?</span></h2>
+                        <p class="art wow fadeInUp" data-wow-delay="0.4s">Как правило, эти работы выполняют предприятия, которые занимаются всем: ландшафтным дизайном, освещением, уходом за деревьями, стрижкой газонов и т.д. Не всегда в их штате есть специалист с достаточным опытом и знаниями именно в сфере автополива.</p>
+                        <p class="accent wow fadeInUp" data-wow-delay="0.4s">К сожалению, мы часто сталкиваемся с ситуацией, когда <span>оборудование подбирается без гидравлического расчета - «на глаз», с запасом.</span></p>
+                        <p class="art wow fadeInUp" data-wow-delay="0.4s">Устанавливаются лишние дождеватели и чересчур мощные контроллеры. </p>
+                        <p class="motiv wow fadeInUp" data-wow-delay="0.4s">А платите за все это вы - заказчики…</p>
+                    </div>
+                    <div class="section-art__image section-art__image_top">
+                        <div class="imageart imageart_transtop">
+                            <div class="rectart rectart_ty1"><span class="wow fadeInUp" data-wow-delay="0.4s"></span><span class="wow fadeInDown" data-wow-delay="0.5s"></span><span class="wow fadeInRight" data-wow-delay="0.6s"></span><span class="wow fadeInLeft" data-wow-delay="0.7s"></span><span class="wow fadeInUp" data-wow-delay="0.8s"></span></div><img class="wow fadeInUp" src="img/dp1.png" alt="" data-wow-delay="1s" />
+                            <div class="circart circart_ty1"><span class="wow zoomIn" data-wow-delay="2s"></span><span class="wow zoomIn" data-wow-delay="2.1s"></span><span class="wow zoomIn" data-wow-delay="2.2s"></span><span class="wow zoomIn" data-wow-delay="2.3s"></span><span class="wow zoomIn" data-wow-delay="2.4s"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="circles circles_dark circles_2"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#art_circle"></use>
+                </svg></div>
+        </div><!-- ====================================-->
+        <!-- КОМПАНИЯ СПЕЦ. НА СИСТЕМЕ АВТОПОЛИВА-->
+        <!-- ====================================-->
+        <section class="section section_accent">
+            <div class="container container_rel">
+                <h2 class="section-header wow fadeInUp" data-wow-delay="0.2s">Компания <span>poliv.family</span> специализируется на системе автополива</h2>
+                <div class="section-subheader wow fadeInUp" data-wow-delay="0.5s">Мы тщательно замеряем ваш участок и подбираем оборудование, необходимое для равномерного полива территории - без переплат и чрезмерного орошения</div>
+                <div class="services">
+                    <div class="services__item wow zoomIn" data-wow-delay="0.6s">
+                        <div class="services__image"><img src="img/services/1.png" alt="" /></div>
+                        <div class="services__name">Монтаж</div>
+                    </div>
+                    <div class="services__item wow zoomIn" data-wow-delay="0.7s">
+                        <div class="services__image"><img src="img/services/2.png" alt="" /></div>
+                        <div class="services__name">Проектирование</div>
+                    </div>
+                    <div class="services__item wow zoomIn" data-wow-delay="0.8s">
+                        <div class="services__image"><img src="img/services/3.png" alt="" /></div>
+                        <div class="services__name">Сезонное обслуживание</div>
+                    </div>
+                    <div class="services__item wow zoomIn" data-wow-delay="0.9s">
+                        <div class="services__image"><img src="img/services/4.png" alt="" /></div>
+                        <div class="services__name">Ремонт и настройка</div>
+                    </div>
+                    <div class="services__item wow zoomIn" data-wow-delay="1s">
+                        <div class="services__image"><img src="img/services/5.png" alt="" /></div>
+                        <div class="services__name">Подбор оборудования для самостоятельного монтажа</div>
+                    </div>
+                    <div class="services__item wow zoomIn" data-wow-delay="1.1s">
+                        <div class="services__image"><img src="img/services/6.png" alt="" /></div>
+                        <div class="services__name">Капельный полив</div>
+                    </div>
+                </div>
+                <div class="goform wow fadeInUp" data-wow-delay="1s"> <button class="button button_b button_b-dark" data-modal="modal-1"><span>Рассчитать стоимость</span><span>Просчитать</span></button></div>
+                <div class="circles circles_white circles_1"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </section><!-- =======-->
+        <!-- ОБЪЕКТЫ-->
+        <!-- =======-->
+        <section class="section">
+            <div class="container container_rel">
+                <h2 class="section-header wow fadeInUp" data-wow-delay="0.2s"><span>Более 40 объектов</span> в Харькове и области</h2>
+                <div class="works wow fadeIn" data-wow-delay="0.5s">
+                    <!-- Slider main container-->
+                    <div class="swiper-container slider-projects">
+                        <!-- Additional required wrapper-->
+                        <div class="swiper-wrapper">
+                            <!-- Slides-->
+                            <div class="swiper-slide">
+                                <div class="portfolio">
+                                    <div class="portfolio__gallery">
+                                        <div class="pgallery">
+                                            <!-- Slider main container-->
+                                            <div class="swiper-container slider-photos">
+                                                <!-- Additional required wrapper-->
+                                                <div class="swiper-wrapper">
+                                                    <!-- Slides-->
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/1/p1.jpg" data-fancybox="OBJECT_NUMBER_1"><img src="img/portfolio/1/p1.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/1/p2.jpg" data-fancybox="OBJECT_NUMBER_1"><img src="img/portfolio/1/p2.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/1/p3.jpg" data-fancybox="OBJECT_NUMBER_1"><img src="img/portfolio/1/p3.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/1/p4.jpg" data-fancybox="OBJECT_NUMBER_1"><img src="img/portfolio/1/p4.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/1/p5.jpg" data-fancybox="OBJECT_NUMBER_1"><img src="img/portfolio/1/p5.jpg" alt="" /></a></div>
+
+                                                </div>
+                                                <div class="gallerypag">
+                                                    <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-prev"></use>
+                                                        </svg></div>
+                                                    <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-next"></use>
+                                                        </svg></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__about">
+                                        <div class="pwork">
+                                            <div class="pwork__header">Даниил и Аня, частный сад, весна 2019 </div>
+                                            <p class="p"><span class="strong">Заказчик</span> обратился в конце зимы с готовым планом озеленения. И предложением по установке полива. </p>
+                                            <p class="p"> <span class="strong">Мы 
+                                                предложили</span>  свою схему полива и просчитали смету, которая оказалась на порядок выгоднее. </p>
+                                            <p class="p"> <span class="strong">Монтаж </span> занял около 1,5 недель. 
+                                                Система отработала без вмешательства целый сезон.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="portfolio">
+                                    <div class="portfolio__gallery">
+                                        <div class="pgallery">
+                                            <!-- Slider main container-->
+                                            <div class="swiper-container slider-photos">
+                                                <!-- Additional required wrapper-->
+                                                <div class="swiper-wrapper">
+                                                    <!-- Slides-->
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/2/p1.jpg" data-fancybox="OBJECT_NUMBER_2"><img src="img/portfolio/2/p1.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/2/p2.jpg" data-fancybox="OBJECT_NUMBER_2"><img src="img/portfolio/2/p2.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/2/p3.jpg" data-fancybox="OBJECT_NUMBER_2"><img src="img/portfolio/2/p3.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/2/p4.jpg" data-fancybox="OBJECT_NUMBER_2"><img src="img/portfolio/2/p4.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/2/p5.jpg" data-fancybox="OBJECT_NUMBER_2"><img src="img/portfolio/2/p5.jpg" alt="" /></a></div>
+                                                    
+                                                </div>
+                                                <div class="gallerypag">
+                                                    <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-prev"></use>
+                                                        </svg></div>
+                                                    <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-next"></use>
+                                                        </svg></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__about">
+                                        <div class="pwork">
+                                            <div class="pwork__header">Сачин, частный сад</div>
+                                            <p class="p"><span class="strong">Посадка </span>декоративных растений, укладка рулонного газона и устройство системы автоматического полива.
+                                                </p>
+                                            <p class="p"> <span class="strong">Работы </span> выполнены в 2019 году и участок находится на регулярном сезонном обслуживании.</p>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="portfolio">
+                                    <div class="portfolio__gallery">
+                                        <div class="pgallery">
+                                            <!-- Slider main container-->
+                                            <div class="swiper-container slider-photos">
+                                                <!-- Additional required wrapper-->
+                                                <div class="swiper-wrapper">
+                                                    <!-- Slides-->
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p1.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p1.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p2.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p2.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p3.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p3.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p4.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p4.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p5.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p5.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p6.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p6.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p7.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p7.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/3/p8.jpg" data-fancybox="OBJECT_NUMBER_3"><img src="img/portfolio/3/p8.jpg" alt="" /></a></div>
+                                                   
+                                                </div>
+                                                <div class="gallerypag">
+                                                    <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-prev"></use>
+                                                        </svg></div>
+                                                    <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-next"></use>
+                                                        </svg></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__about">
+                                        <div class="pwork">
+                                            <div class="pwork__header">ЖК Феличита, начало работ - осень 2018</div>
+                                            <p class="p"><span class="strong">Задача</span> - установить систему автоматического полива в клубном жилом комплексе "Феличита".</p>
+                                            <p class="p"> <span class="strong">Сдача</span> комплекса происходит этапами, поэтому работы по озеленению и установке автоматического полива также выполняются частями.</p>
+                                            <p class="p"> <span class="strong">Первый дом</span> комплекса уже сдан и система полива отработала целый сезон, справившись с очень засушливым летом 2019 года.</p>
+                                            <p class="p"> <span class="strong">Источник воды</span> - городские сети. За отключение полива во время дождей отвечает беспроводной датчик дождя.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="portfolio">
+                                    <div class="portfolio__gallery">
+                                        <div class="pgallery">
+                                            <!-- Slider main container-->
+                                            <div class="swiper-container slider-photos">
+                                                <!-- Additional required wrapper-->
+                                                <div class="swiper-wrapper">
+                                                    <!-- Slides-->
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p1.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p1.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p2.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p2.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p3.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p3.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p4.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p4.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p5.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p5.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p6.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p6.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p7.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p7.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/4/p8.jpg" data-fancybox="OBJECT_NUMBER_4"><img src="img/portfolio/4/p8.jpg" alt="" /></a></div>
+                                              
+                                                </div>
+                                                <div class="gallerypag">
+                                                    <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-prev"></use>
+                                                        </svg></div>
+                                                    <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-next"></use>
+                                                        </svg></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__about">
+                                        <div class="pwork">
+                                            <div class="pwork__header">Анатолий, коттеджный поселок "Европейский квартал"
+                                                 </div>
+                                            <p class="p"><span class="strong">В конце осени</span>  2017 года были проложены все подземные коммуникации, а весной 2018 года был постелен
+                                                газон и запущена системы полива.</p>
+                                            <p class="p"> <span class="strong">2 года</span>  система работает без нареканий.</p>
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="portfolio">
+                                    <div class="portfolio__gallery">
+                                        <div class="pgallery">
+                                            <!-- Slider main container-->
+                                            <div class="swiper-container slider-photos">
+                                                <!-- Additional required wrapper-->
+                                                <div class="swiper-wrapper">
+                                                    <!-- Slides-->
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p1.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p1.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p2.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p2.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p3.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p3.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p4.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p4.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p5.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p5.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p6.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p6.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p7.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p7.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p8.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p8.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p9.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p9.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p10.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p10.jpg" alt="" /></a></div>
+                                                    <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/5/p11.jpg" data-fancybox="OBJECT_NUMBER_5"><img src="img/portfolio/5/p11.jpg" alt="" /></a></div>
+                                                    
+                                                </div>
+                                                <div class="gallerypag">
+                                                    <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-prev"></use>
+                                                        </svg></div>
+                                                    <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                            <use xlink:href="#icon_arrow-next"></use>
+                                                        </svg></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="portfolio__about">
+                                        <div class="pwork">
+                                            <div class="pwork__header">Сергей, частный сад, площадь озеленения около 1 га</div>
+                                            <p class="p"><span class="strong">Проект </span> реализовывался частями с 2016 года.</p>
+                                            <p class="p"> <span class="strong">Особенностью</span> участка является перепад высоты около 13 метров и источник вод, находящийся в самом его низу. </p>
+                                            <p class="p"> <span class="strong">Водозабором</span> служит река, поэтому понадобилась дополнительная фильтрация при помощи гравийного фильтра.</p>
+                                            <p class="p"> <span class="strong">С 2016 года</span>  на участке производится регулярное обслуживание по сезонной регулировке и чистке фильтров.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                <div class="swiper-slide">
+                    <div class="portfolio">
+                        <div class="portfolio__gallery">
+                            <div class="pgallery">
+                                <!-- Slider main container-->
+                                <div class="swiper-container slider-photos">
+                                    <!-- Additional required wrapper-->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides-->
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/6/p1.jpg" data-fancybox="OBJECT_NUMBER_6"><img src="img/portfolio/6/p1.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/6/p2.jpg" data-fancybox="OBJECT_NUMBER_6"><img src="img/portfolio/6/p2.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/6/p3.jpg" data-fancybox="OBJECT_NUMBER_6"><img src="img/portfolio/6/p3.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/6/p4.jpg" data-fancybox="OBJECT_NUMBER_6"><img src="img/portfolio/6/p4.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/6/p5.jpg" data-fancybox="OBJECT_NUMBER_6"><img src="img/portfolio/6/p5.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/6/p6.jpg" data-fancybox="OBJECT_NUMBER_6"><img src="img/portfolio/6/p6.jpg" alt="" /></a></div>
+                                    
+                                    </div>
+                                    <div class="gallerypag">
+                                        <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-prev"></use>
+                                            </svg></div>
+                                        <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-next"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio__about">
+                            <div class="pwork">
+                                <div class="pwork__header">Иван и Ирина</div>
+                                <p class="p"><span class="strong">Обратились</span>  для установки автоматического полива в своем взрослом саду, который ранее поливали из шланга.
+                                   
+                                   </p>
+                                <p class="p"> <span class="strong">Был выполнен монтаж </span>   поливочного оборудование на газоне спо снятием и последующей укладко дернины на место. </p>
+                                <p class="p"> <span class="strong">Уже через 2 месяца</span>   следов от работ на газоне почти не видно.
+                                    Участок на регулярном сезонном обслуживании с 2017 года.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="portfolio">
+                        <div class="portfolio__gallery">
+                            <div class="pgallery">
+                                <!-- Slider main container-->
+                                <div class="swiper-container slider-photos">
+                                    <!-- Additional required wrapper-->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides-->
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/7/p1.jpg" data-fancybox="OBJECT_NUMBER_7"><img src="img/portfolio/7/p1.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/7/p2.jpg" data-fancybox="OBJECT_NUMBER_7"><img src="img/portfolio/7/p2.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/7/p3.jpg" data-fancybox="OBJECT_NUMBER_7"><img src="img/portfolio/7/p3.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/7/p4.jpg" data-fancybox="OBJECT_NUMBER_7"><img src="img/portfolio/7/p4.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/7/p5.jpg" data-fancybox="OBJECT_NUMBER_7"><img src="img/portfolio/7/p5.jpg" alt="" /></a></div>
+                                         </div>
+                                    <div class="gallerypag">
+                                        <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-prev"></use>
+                                            </svg></div>
+                                        <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-next"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio__about">
+                            <div class="pwork">
+                                <div class="pwork__header">Алексей, частный сад. Установка автоматического полива и посев газона.
+                                    </div>
+                                <p class="p"><span class="strong">Задачей было</span> очистить участок от бурьяна, выполнить планировку, смонтировать насосную станцию, 
+                                    собрать декоративный огородик и высадить клумбу с многолетниками.</p>
+                                <p class="p"> <span class="strong">Работы </span> выполнены в срок по договору. Участок на сезонном обслуживании с 2017 года.</p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="portfolio">
+                        <div class="portfolio__gallery">
+                            <div class="pgallery">
+                                <!-- Slider main container-->
+                                <div class="swiper-container slider-photos">
+                                    <!-- Additional required wrapper-->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides-->
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/8/p1.jpg" data-fancybox="OBJECT_NUMBER_8"><img src="img/portfolio/8/p1.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/8/p2.jpg" data-fancybox="OBJECT_NUMBER_8"><img src="img/portfolio/8/p2.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/8/p3.jpg" data-fancybox="OBJECT_NUMBER_8"><img src="img/portfolio/8/p3.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/8/p4.jpg" data-fancybox="OBJECT_NUMBER_8"><img src="img/portfolio/8/p4.jpg" alt="" /></a></div>
+                                       </div>
+                                    <div class="gallerypag">
+                                        <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-prev"></use>
+                                            </svg></div>
+                                        <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-next"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio__about">
+                            <div class="pwork">
+                                <div class="pwork__header">Татьяна, частный сад
+                                    </div>
+                                <p class="p"><span class="strong">Необходимо было</span>  сделать посадку декоративных растений, постелить рулонный газо и установить 
+                                    систему автоматического полива.
+                                     </p>
+                                <p class="p"> <span class="strong">Управление</span>  поливом осуществляется беспроводным контроллером из-за невозможности подведения сети
+                                    220В.</p>
+                                <p class="p"> <span class="strong">Первый дом</span> комплекса уже сдан и система полива отработала целый сезон, справившись с очень засушливым летом 2019 года.</p>
+                                <p class="p"> <span class="strong">Работы</span>  были выполнены за 4 дня.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="portfolio">
+                        <div class="portfolio__gallery">
+                            <div class="pgallery">
+                                <!-- Slider main container-->
+                                <div class="swiper-container slider-photos">
+                                    <!-- Additional required wrapper-->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides-->
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p1.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p1.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p2.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p2.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p3.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p3.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p4.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p4.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p5.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p5.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p6.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p6.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p7.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p7.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/9/p8.jpg" data-fancybox="OBJECT_NUMBER_9"><img src="img/portfolio/9/p8.jpg" alt="" /></a></div>
+                                         </div>
+                                    <div class="gallerypag">
+                                        <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-prev"></use>
+                                            </svg></div>
+                                        <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-next"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio__about">
+                            <div class="pwork">
+                                <div class="pwork__header">Сергей, частный сад, осень 2019</div>
+                                <p class="p"><span class="strong">Укладка </span>  рулонного газона и устройство системы автоматического полива, прокладка кабелей декоративного 
+                                    освещения и видеонаблюдения.
+                                    </p>
+                                <p class="p"> <span class="strong">Окончание работ</span>  - весна 2020</p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="portfolio">
+                        <div class="portfolio__gallery">
+                            <div class="pgallery">
+                                <!-- Slider main container-->
+                                <div class="swiper-container slider-photos">
+                                    <!-- Additional required wrapper-->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides-->
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p1.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p1.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p2.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p2.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p3.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p3.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p4.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p4.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p5.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p5.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p6.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p6.jpg" alt="" /></a></div>
+                                        <div class="swiper-slide"><a class="pgallery__item" href="img/portfolio/10/p7.jpg" data-fancybox="OBJECT_NUMBER_10"><img src="img/portfolio/10/p7.jpg" alt="" /></a></div>
+                                       </div>
+                                    <div class="gallerypag">
+                                        <div class="gallerypag__prev"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-prev"></use>
+                                            </svg></div>
+                                        <div class="gallerypag__next"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                                <use xlink:href="#icon_arrow-next"></use>
+                                            </svg></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio__about">
+                            <div class="pwork">
+                                <div class="pwork__header">Руслан, частный сад
+                                   </div>
+                                <p class="p"><span class="strong">Посадка</span>   декоративных растений, укладка рулонного газона и устройство системы автоматического полива.
+                                   </p>
+                                <p class="p"> <span class="strong">Управление </span>  автоматическим поливом осуществляется со смартфона с помощью приложения Hydrawise фирмы Hunter.
+                                    </p>
+                                <p class="p"> <span class="strong">Участок </span> на сезонном обслуживании с 2018 года. </p>
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                <div class="slidernum wow fadeIn" data-wow-delay="0.5s">
+                    <div class="slidernum__current">1</div>
+                    <div class="slidernum__total"></div>
+                </div>
+                <div class="workspag wow fadeIn" data-wow-delay="0.5s">
+                    <div class="workspag__prev workspag__disabled"><i><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="#icon_arrow-prev"></use>
+                            </svg></i><span>Предыдущий проект</span></div>
+                    <div class="workspag__next"><span>Следующий проект</span><i><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="#icon_arrow-next"></use>
+                            </svg></i></div>
+                </div>
+                <a class="goform wow fadeInUp" href="https://www.instagram.com/poliv.family/" data-wow-delay="0.5s"><button class="button button_b button_b-dark button_b-icon"><span><span><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                    <use xlink:href="#icon_instagram-2"></use>
+                                </svg></span><span>Объекты в Instagram</span></span><span>Ознакомиться</span></button></a>
+                <div class="circles circles_dark circles_3"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </section><!-- =================-->
+        <!-- УЗНАЙТЕ СТОИМОСТЬ-->
+        <!-- =================-->
+        <div class="section">
+            <div class="container container_rel">
+                <div class="circles circles_dark circles_4"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+                <div class="bigform bigform_trtop">
+                    <div class="bigform__header">
+                        <h2 class="section-header section-header_left wow fadeInLeft" data-wow-delay="0.5s">Узнайте <span>стоимость установки</span> системы под ключ</h2>
+                        <div class="section-subheader section-subheader_left wow fadeInLeft" data-wow-delay="0.6s">Вы ничего не потеряете, если просто сравните цены, верно? Как правило, у нас существенно дешевле.</div>
+                    </div>
+                    <div class="bigform__form">
+                        <form class="deform form-calc wow fadeInUp" action="" data-wow-delay="0.5s">
+                            <div class="select">
+                                <div class="select__icon"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                        <use xlink:href="#icon_arrow-down"></use>
+                                    </svg></div><select name="type">
+                                        <option value="1">Газон</option>
+                                        <option value="2">Сад</option>
+                                        <option value="3">Комбинированный</option>
+                                </select>
+                            </div>
+                            <div class="input-text">
+                                <div class="input-text__icon"><img src="img/construction_carpenter_ruler.png" alt="" /></div><input type="text" name="size" placeholder="Размер участка, (м)" />
+                            </div>
+                            <div class="input-text">
+                                <div class="input-text__icon"><img src="img/customer.png" alt="" /></div><input type="text" name="name" placeholder="Имя" />
+                            </div>
+                            <div class="input-text">
+                                <div class="input-text__icon"><img src="img/touchscreen.png" alt="" /></div><input class="phone-input" type="text" name="phone" placeholder="Телефон" />
+                            </div><button class="button button_b" type="submit"><span>Рассчитать стоимость</span><span>Просчитать</span></button>
+                        </form>
+                        <div class="formcomplete formcomplete_modal formcomplete_ok"><span>Спасибо! Мы вас перезвоним</span></div>
+                        <div class="formcomplete formcomplete_modal formcomplete_error"><span>Не удалось отправить</span></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- ==================-->
+        <!-- ПРИЧИНЫ УСТАНОВИТЬ -->
+        <!-- ==================-->
+        <section class="section section_accent">
+            <div class="container container_rel">
+                <div class="section-art">
+                    <div class="section-art__text">
+                        <h2 class="section-header section-header_left wow fadeInLeft" data-wow-delay="0.2s">Все еще сомневаетесь, <span>нужен ли автополив </span>вообще?</h2>
+                        <div class="section-subheader section-subheader_left wow fadeInLeft" data-wow-delay="0.3s">Решать, конечно, вам. Но напомним, что автоматический полив газона это не только экономия времени.</div>
+                        <div class="btitle wow fadeInLeft" data-wow-delay="0.4s">3 причины установить систему автополива:</div>
+                        <ul class="listdots">
+                            <li class="listdots__item wow fadeInLeft" data-wow-delay="0.5s"><b>Поливая газон вручную,</b> вы никогда не добьетесь равномерного орошения. Некоторые участки будут сухими, другие - залитыми. А пятна на газоне не нравятся никому…</li>
+                            <li class="listdots__item wow fadeInLeft" data-wow-delay="0.6s"><b>Чрезмерный полив</b> также приводит к дополнительным расходам. Так что стоит задуматься, экономите ли вы на самом деле, тратя кучу времени на ручной полив.</li>
+                            <li class="listdots__item wow fadeInLeft" data-wow-delay="0.7s"><b>Самое главное</b> - гости умрут от зависти, когда увидят вашу новую систему! Придется оставить вам десяток визиток, ведь все захотят себе такую же…</li>
+                        </ul>
+                        <div class="bltoform wow fadeInUp" data-wow-delay="0.7s"><button class="button button_b button_b-dark" type="submit" data-modal="modal-3"><span>Заказать автополив</span><span>Закажите</span></button></div>
+                    </div>
+                    <div class="section-art__image">
+                        <div class="imageart"><img class="wow fadeInUp" src="img/banner-layer-3.png" alt="" data-wow-delay="1s" />
+                            <div class="circart circart_ty2"><span class="wow zoomIn" data-wow-delay="2.1s"></span><span class="wow zoomIn" data-wow-delay="2.2s"></span><span class="wow zoomIn" data-wow-delay="2.3s"></span><span class="wow zoomIn" data-wow-delay="2.4s"></span><span class="wow zoomIn" data-wow-delay="2.5s"></span></div>
+                            <div class="rectart rectart_ty2"><span class="wow zoomIn" data-wow-delay="1.1s"></span><span class="wow zoomIn" data-wow-delay="1.2s"></span><span class="wow zoomIn" data-wow-delay="1.3s"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="circles circles_white circles_5"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#art_circle"></use>
+                </svg></div>
+        </section><!-- ========================-->
+        <!-- КАК ОБСЛУЖИВАТЬ СИСТЕМУ? -->
+        <!-- ========================-->
+        <section class="section">
+            <div class="container container_rel">
+                <div class="section-art section-art_revers">
+                    <div class="section-art__text">
+                        <h2 class="section-header section-header_left wow fadeInUp" data-wow-delay="0.2s">Как <span>обслуживать</span> систему?</h2>
+                        <p class="p wow fadeInRight" data-wow-delay="0.2s">После установки и правильной настройки вызов специалиста, как правило, нужен два раза в год - для осенней консервации и запуска весной.</p>
+                        <p class="p wow fadeInRight" data-wow-delay="0.3s">Но время от времени может понадобиться дополнительный уход: чистка фильтров, сезонная регулировка контроллера. Вы можете делать это сами, но если нет на это времени, мы с радостью окажем эту услугу.</p>
+                        <p class="accent wow fadeInRight" data-wow-delay="0.4s">Если вас интересует обслуживание уже установленной системы, давайте договоримся о встрече - мы подъедем и дадим свои рекоммендации.</p>
+                        <div class="bltoform wow fadeIn" data-wow-delay="1s"><button class="button button_b button_b-dark" type="submit" data-modal="modal-2"><span>Получить консультацию</span><span>Закажите звонок</span></button></div>
+                    </div>
+                    <div class="section-art__image">
+                        <div class="imageart"><img class="wow fadeInUp" src="img/Screenshot_3.png" alt="" data-wow-delay="1s" />
+                            <div class="circart circart_ty2"><span class="wow zoomIn" data-wow-delay="2.1s"></span><span class="wow zoomIn" data-wow-delay="2.2s"></span><span class="wow zoomIn" data-wow-delay="2.3s"></span><span class="wow zoomIn" data-wow-delay="2.4s"></span><span class="wow zoomIn" data-wow-delay="2.5s"></span></div>
+                            <div class="rectart rectart_ty3"><span class="wow zoomIn" data-wow-delay="1.1s"></span><span class="wow zoomIn" data-wow-delay="1.2s"></span><span class="wow zoomIn" data-wow-delay="1.3s"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circles circles_dark circles_6"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+                <div class="circles circles_dark circles_7"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </section><!-- ==============================-->
+        <!--  У ВАС ЕСТЬ СУЩЕСТВУЮЩИЙ ГАЗОН-->
+        <!-- ==============================-->
+        <section class="section section_accent">
+            <div class="container container_rel">
+                <div class="section-art">
+                    <div class="section-art__text section-art__text_accent">
+                        <h2 class="section-header section-header_left wow fadeInUp" data-wow-delay="0.2s">У вас есть <span>существующий газон</span> со взрослыми растениями?</h2>
+                        <p class="p wow fadeInLeft" data-wow-delay="0.3s">Тогда вы знаете, что такое таскать каждый день шланги, каждый раз ломая цветы. <span class="strong">Есть простое решение</span> - установите автополив.</p>
+                        <p class="accent wow fadeInLeft" data-wow-delay="0.3s">Если вас интересует обслуживание уже установленной системы, давайте договоримся о встрече - мы подъедем и дадим свои рекоммендации.</p>
+                        <div class="bltoform wow fadeInUp" data-wow-delay="1s"><button class="button button_b button_b-dark" type="submit" data-modal="modal-3"><span>Заказать автополив</span><span>Закажите</span></button></div>
+                    </div>
+                    <div class="section-art__image">
+                        <div class="imageart"><img class="wow fadeInUp" src="img/blobid1558939753334.png" alt="" data-wow-delay="1s" />
+                            <div class="circart circart_ty3"><span class="wow zoomIn" data-wow-delay="2.1s"></span><span class="wow zoomIn" data-wow-delay="2.2s"></span><span class="wow zoomIn" data-wow-delay="2.3s"></span><span class="wow zoomIn" data-wow-delay="2.4s"></span><span class="wow zoomIn" data-wow-delay="2.5s"></span><span class="wow zoomIn" data-wow-delay="2.6s"></span></div>
+                            <div class="rectart rectart_ty4"><span class="wow zoomIn" data-wow-delay="1.1s"></span><span class="wow zoomIn" data-wow-delay="1.2s"></span><span class="wow zoomIn" data-wow-delay="1.3s"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circles circles_white circles_8"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+                <div class="circles circles_white circles_11"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </section><!-- ==============================-->
+        <!-- ПОЧЕМУ ГАРАНТИЯ 5 ЛЕТ?-->
+        <!-- ==============================-->
+        <section class="section">
+            <div class="container container_rel">
+                <div class="section-art section-art_revers">
+                    <div class="section-art__text">
+                        <h2 class="section-header section-header_left wow fadeInUp" data-wow-delay="0.2s">Почему гарантия <br><span>5 лет?</span></h2>
+                        <p class="p wow fadeInUp" data-wow-delay="0.3s">Мы используем только надежное и проверенное оборудование, в котором уверены на 100% - с ним вы точно не будете иметь проблем:</p>
+                        <ul class="listdots listdots_mini">
+                            <li class="listdots__item wow fadeInUp" data-wow-delay="0.3s"><b>Hunter</b> (США)</li>
+                            <li class="listdots__item wow fadeInUp" data-wow-delay="0.4s"><b>Toro</b> (США)</li>
+                            <li class="listdots__item wow fadeInUp" data-wow-delay="0.5s"><b>RainBird</b> (США)</li>
+                            <li class="listdots__item wow fadeInUp" data-wow-delay="0.6s"><b>PlasticaAlfa</b> (Италия)</li>
+                            <li class="listdots__item wow fadeInUp" data-wow-delay="0.7s"><b>Irritec</b> (Италия)</li>
+                        </ul>
+                        <p class="accent wow fadeInUp" data-wow-delay="0.8s">Сами понимаете - если производитель дает 5 лет гарантии, фактический срок службы 10-15 лет. Под наблюдением Poliv.Family, конечно.</p>
+                    </div>
+                    <div class="section-art__image">
+                        <div class="imageart"><img src="img/irritec-1200x630.png" alt="" />
+                            <div class="circart circart_ty2"><span></span><span></span><span></span><span></span><span></span></div>
+                            <div class="rectart rectart_ty5"><span></span><span></span><span></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="circles circles_dark circles_9"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+                <div class="circles circles_dark circles_10"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </section><!-- ======-->
+        <!-- СКИДКА-->
+        <!-- ======-->
+        <div class="promo">
+            <div class="container">
+                <div class="promo__content">
+                    <div class="promo__about wow fadeInLeft" data-wow-delay="0.6s">
+                        <div class="promo__title">Важно: </div>
+                        <div class="promo__header">оплату можно вносить частями на протяжении монтажа. </div>
+                        <div class="promo__comment">Но при предоплате 70% мы дадим скидку - 5% на всю смету! <br>Воспользуйтесь этим!</div>
+                    </div>
+                    <div class="promo__act wow fadeInRight" data-wow-delay="0.6s"><button class="button button_b" type="submit" data-modal="modal-3"><span>Получить скидку</span><span>Забрать</span></button></div>
+                </div>
+                <div class="circles circles_dark circles_12"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </div><!-- ================-->
+        <!-- БЕСПЛАТНЫЙ ЗАМЕР-->
+        <!-- ================-->
+        <section class="section">
+            <div class="container container_rel">
+                <div class="bigform">
+                    <div class="bigform__header">
+                        <h2 class="section-header section-header_left wow fadeInLeft" data-wow-delay="0.2s">Закажите <br><span>бесплатный </span><br>замер</h2>
+                        <div class="section-subheader section-subheader_left wow fadeInLeft" data-wow-delay="0.3s">Конечно, по телефону точно подобрать оборудование и просчитать смету мы не сможем. Давайте встретимся, мы ответим на все ваши вопросы, проведем замер участка, составим схему и просчитем точную стоимость.<br><br><b>Встретимся у вас на участке!</b></div>
+                    </div>
+                    <div class="bigform__form">
+                        <form class="deform form-measure wow fadeInUp" action="" data-wow-delay="0.5s">
+                            <div class="input-text">
+                                <div class="input-text__icon"><img src="img/customer.png" alt="" /></div><input type="text" name="name" placeholder="Имя" />
+                            </div>
+                            <div class="input-text">
+                                <div class="input-text__icon"><img src="img/touchscreen.png" alt="" /></div><input class="phone-input" type="text" name="phone" placeholder="Телефон" />
+                            </div><button class="button button_b" type="submit"><span>бесплатный замер</span><span>Заказать</span></button>
+                        </form>
+                        <div class="formcomplete formcomplete_modal formcomplete_ok"><span>Спасибо! Мы вас перезвоним</span></div>
+                        <div class="formcomplete formcomplete_modal formcomplete_error"><span>Не удалось отправить</span></div>
+                    </div>
+                </div>
+                <div class="circles circles_dark circles_13"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                        <use xlink:href="#art_circle"></use>
+                    </svg></div>
+            </div>
+        </section><!-- ======-->
+        <!-- FOOTER-->
+        <!-- ======-->
+        <div class="container container_rel">
+            <div class="footer">
+                <div class="footer__logo"><img src="img/logo-black.svg" alt="" /></div>
+                <div class="footer__contacts">
+                    <div class="footer__copy"><span>© 2020. Poliv.Family</span><span> Разработка: <a href="https://tkachuk.pro">tkachuk.pro</a></span></div>
+                    <div class="footer__phone"><a class="callphone callphone_black" href="tel:0979774247"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                                <use xlink:href="#icon_phone"></use>
+                            </svg><span>(097) 977-42-47</span></a></div>
+                </div>
+                <div class="footer__call"><button class="button button_c" data-modal="modal-2">Заказать звонок</button></div>
+            </div>
+            <div class="circles circles_dark circles_14"><svg class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+                    <use xlink:href="#art_circle"></use>
+                </svg></div>
+        </div>
+    </div>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
